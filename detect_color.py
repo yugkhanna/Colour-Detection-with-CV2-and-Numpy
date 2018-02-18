@@ -1,5 +1,5 @@
 # USAGE
-# python detect_color.py --image pokemon_games.png
+# python detect_color.py --image imagename.jpg
 
 # import the necessary packages
 def colour_detection():
