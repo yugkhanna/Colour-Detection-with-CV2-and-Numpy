@@ -47,7 +47,7 @@ def colour_detection():
 
 	user = raw_input("Which color do you want to detect?")
 	# loop over the boundaries
-	if (user=="RED" or user=="red" or user=="Red" or user=="R"):
+	if (user.lower()=="red" or user=="R"):
 
 		for (lower, upper) in boundariesred:
 			# create NumPy arrays from the boundaries
@@ -68,7 +68,7 @@ def colour_detection():
 			else:
 				print "Thank you for using"
 
-	elif (user=="BLUE" or user=="blue" or user=="Blue" or user=="B"):
+	elif (user.lower()=="blue" or user=="B"):
 
 		for (lower, upper) in boundariesblue:
 			# create NumPy arrays from the boundaries
@@ -84,7 +84,7 @@ def colour_detection():
 			cv2.imshow("images", np.hstack([image, output]))
 			cv2.waitKey(0)
 
-	elif (user=="YELLOW" or user=="yellow" or user=="Yellow" or user=="Y"):
+	elif (user.lower()=="yellow" or user=="Y"):
 
 		for (lower, upper) in boundariesyellow:
 			# create NumPy arrays from the boundaries
@@ -100,7 +100,7 @@ def colour_detection():
 			cv2.imshow("images", np.hstack([image, output]))
 			cv2.waitKey(0)
 
-	elif (user=="GREY" or user=="grey" or user=="Grey" or user=="Gr"):
+	elif (user.lower()=="grey" or user=="Gr"):
 
 		for (lower, upper) in boundariesgrey:
 			# create NumPy arrays from the boundaries
