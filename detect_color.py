@@ -1,11 +1,11 @@
 """ USAGE
 python detect_color.py --image imagename.jpg """
 
-def colour_detector():
+import numpy as np
+import cv2
+import argparse
 
-	import numpy as np
-	import cv2
-	import argparse
+def detect_color():
 
 	# constructing argument parser and parsing the arguments
 	argument_p = argparse.ArgumentParser()
@@ -14,110 +14,124 @@ def colour_detector():
 
 	# load the image
 	image = cv2.imread(args["image"])
-	
-	boundariesblue = [
+
+	boundaries_blue = [
 		([86, 31, 4], [220, 88, 50]),
 		([17, 15, 100], [50, 56, 200]),
 		([25, 146, 190], [62, 174, 250]),
 		([103, 86, 65], [145, 133, 128])
 	]
 
-	boundariesred = [
+	boundaries_red = [
 			([17, 15, 100], [50, 56, 200]),
 			([86, 31, 4], [220, 88, 50]),
 			([25, 146, 190], [62, 174, 250]),
 			([103, 86, 65], [145, 133, 128])
 	]
 
-	boundariesyellow = [
+	boundaries_yellow = [
 			([25, 146, 190], [62, 174, 250]),
 			([86, 31, 4], [220, 88, 50]),
 			([17, 15, 100], [50, 56, 200]),
 			([103, 86, 65], [145, 133, 128])
 	]
 
-	boundariesgrey = [
+	boundaries_grey = [
 			([103, 86, 65], [145, 133, 128]),
 			([86, 31, 4], [220, 88, 50]),
 			([17, 15, 100], [50, 56, 200]),
 			([25, 146, 190], [62, 174, 250]),
 	]
 
-	user = raw_input("Which color do you want to detect?")
+	user = input("Which color do you want to detect?")
 	# loop over the boundaries
-	if (user=="RED" or user=="red" or user=="Red" or user=="R"):
+	if (user.islower()=="red" or user.isupper()=="RED"):
+		for (lower_boundary, upper_boundary) in boundaries_red:
 
-		for (lower, upper) in boundariesred:
-			
-			lower = np.array(lower, dtype = "uint8")
-			upper = np.array(upper, dtype = "uint8")
-			
-			mask = cv2.inRange(image, lower, upper)
+			lower_boundary = np.array(lower_boundary, dtype = "uint8")
+			upper_boundary = np.array(upper_boundary, dtype = "uint8")
+
+			mask = cv2.inRange(image, lower_boundary, upper_boundary)
 			output = cv2.bitwise_and(image, image, mask = mask)
-			
+
 			cv2.imshow("images", np.hstack([image, output]))
 			cv2.waitKey(0)
-			ans1 = raw_input("Want to try again?")
-			if (ans1=="Y" or ans1=="Yes"):
-				colour_detection()
+			answer = raw_input("Want to try again?")
+			if (answer=="Y" or answer=="Yes"):
+				detect_color()
 			else:
 				print "Thank you for using"
 
-	elif (user=="BLUE" or user=="blue" or user=="Blue" or user=="B"):
+	elif (user.islower()=="blue" or user.isupper()=="BLUE"):
 
-		for (lower, upper) in boundariesblue:
+		for (lower_boundary, upper_boundary) in boundaries_blue:
 			# create NumPy arrays from the boundaries
-			lower = np.array(lower, dtype = "uint8")
-			upper = np.array(upper, dtype = "uint8")
+			lower_boundary = np.array(lower_boundary, dtype = "uint8")
+			upper_boundary = np.array(upper_boundary, dtype = "uint8")
 
 			# find the colors within the specified boundaries and apply
 			# the mask
-			mask = cv2.inRange(image, lower, upper)
+			mask = cv2.inRange(image, lower_boundary, upper_boundary)
 			output = cv2.bitwise_and(image, image, mask = mask)
 
 			# show the images
 			cv2.imshow("images", np.hstack([image, output]))
 			cv2.waitKey(0)
+			answer = raw_input("Want to try again?")
+			if (answer=="Y" or answer=="Yes"):
+				detect_color()
+			else:
+				print "Thank you for using"
 
-	elif (user=="YELLOW" or user=="yellow" or user=="Yellow" or user=="Y"):
+	elif (user.islower()=="yellow" or user.isupper()=="YELLOW"):
 
-		for (lower, upper) in boundariesyellow:
+		for (lower_boundary, upper_boundary) in boundaries_yellow:
 			# create NumPy arrays from the boundaries
-			lower = np.array(lower, dtype = "uint8")
-			upper = np.array(upper, dtype = "uint8")
+			lower_boundary = np.array(lower_boundary, dtype = "uint8")
+			upper_boundary = np.array(upper_boundary, dtype = "uint8")
 
 			# find the colors within the specified boundaries and apply
 			# the mask
-			mask = cv2.inRange(image, lower, upper)
+			mask = cv2.inRange(image, lower_boundary, upper_boundary)
 			output = cv2.bitwise_and(image, image, mask = mask)
 
 			# show the images
 			cv2.imshow("images", np.hstack([image, output]))
 			cv2.waitKey(0)
+			answer = raw_input("Want to try again?")
+			if (answer=="Y" or answer=="Yes"):
+				detect_color()
+			else:
+				print "Thank you for using"
 
-	elif (user=="GREY" or user=="grey" or user=="Grey" or user=="Gr"):
+	elif (user.islower()=="grey" or user.isupper()=="GREY"):
 
-		for (lower, upper) in boundariesgrey:
+		for (lower_boundary, upper_boundary) in boundaries_grey:
 			# create NumPy arrays from the boundaries
-			lower = np.array(lower, dtype = "uint8")
-			upper = np.array(upper, dtype = "uint8")
+			lower_boundary = np.array(lower_boundary, dtype = "uint8")
+			upper_boundary = np.array(upper_boundary, dtype = "uint8")
 
 			# find the colors within the specified boundaries and apply
 			# the mask
-			mask = cv2.inRange(image, lower, upper)
+			mask = cv2.inRange(image, lower_boundary, upper_boundary)
 			output = cv2.bitwise_and(image, image, mask = mask)
 
 			# show the images
 			cv2.imshow("images", np.hstack([image, output]))
 			cv2.waitKey(0)
+			answer = raw_input("Want to try again?")
+			if (answer=="Y" or answer=="Yes"):
+				detect_color()
+			else:
+				print "Thank you for using"
 
 	else:
 
 		print "Invalid Colour. Colour detection not supported"
-		ans = raw_input("Want to try again?")
-		if (ans=="Y" or ans=="Yes"):
-			colour_detection()
+		ans = input("Want to try again? Y/N")
+		if (ans.isupper()=="Y" or ans.islower()=="y"):
+			detect_color()
 		else:
 			print "Thanks!"
 
-colour_detector()
+detect_color()
