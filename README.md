@@ -8,7 +8,7 @@ An Argument Parser has been used to construct usable instructions. RGB boundarie
 
 **Environment Setup**
 
-`$ pip install opencv2`
+`$ pip install opencv-python`
 `$ pip install numpy`
 
 ---
