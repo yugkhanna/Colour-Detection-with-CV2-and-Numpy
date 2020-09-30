@@ -132,6 +132,6 @@ def detect_color():
 		if (ans.isupper()=="Y" or ans.islower()=="y"):
 			detect_color()
 		else:
-			print "Thanks!"
+			print ("Thanks for Using Our Color Detection App")
 
 detect_color()
